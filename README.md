@@ -1,5 +1,5 @@
 # flameglow
-A basic Linux OS stats collection agent/Prometheus client meant to serve as code reference and/or light use. It uses the proc filesystem as a local data source.
+A basic Linux OS stats collection agent/Prometheus client meant to serve as code reference and/or light use. It uses the /proc filesystem as a local data source and /sys for temperature readings.
 
 ![flameglow_grafana](flameglow_grafana.png)
 

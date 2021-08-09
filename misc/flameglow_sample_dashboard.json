@@ -9,6 +9,12 @@
     },
     {
       "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "timeseries",
       "name": "Time series",
       "version": ""
@@ -273,7 +279,7 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 12,
+        "w": 10,
         "x": 0,
         "y": 0
       },
@@ -534,8 +540,8 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 12,
-        "x": 12,
+        "w": 10,
+        "x": 10,
         "y": 0
       },
       "id": 4,
@@ -560,6 +566,73 @@
       ],
       "title": "Total RAM Usage",
       "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 60
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 21,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.0-29505pre",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sys_stats_cpu_package_temp{} / 1000",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Package Temperature",
+      "type": "stat"
     },
     {
       "datasource": null,
@@ -793,7 +866,7 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 12,
+        "w": 10,
         "x": 0,
         "y": 11
       },
@@ -1053,8 +1126,8 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 12,
-        "x": 12,
+        "w": 10,
+        "x": 10,
         "y": 11
       },
       "id": 10,
@@ -1090,12 +1163,12 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "flameglow",
-  "uid": "3auj3ZG7z",
-  "version": 53
+  "uid": "R0qM1YMnz",
+  "version": 22
 }
