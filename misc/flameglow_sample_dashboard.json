@@ -278,7 +278,7 @@
         ]
       },
       "gridPos": {
-        "h": 11,
+        "h": 12,
         "w": 10,
         "x": 0,
         "y": 0
@@ -539,7 +539,7 @@
         ]
       },
       "gridPos": {
-        "h": 11,
+        "h": 12,
         "w": 10,
         "x": 10,
         "y": 0
@@ -576,8 +576,75 @@
           },
           "decimals": 1,
           "mappings": [],
-          "max": 100,
-          "min": 0,
+          "max": 90,
+          "min": 20,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 60
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.0-29505pre",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sys_stats_gpu_temp{} / 1000",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "GPU Temperature",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 90,
+          "min": 20,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -600,10 +667,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 21,
+        "h": 19,
         "w": 4,
         "x": 20,
-        "y": 0
+        "y": 4
       },
       "id": 12,
       "options": {
@@ -865,10 +932,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 11,
         "w": 10,
         "x": 0,
-        "y": 11
+        "y": 12
       },
       "id": 8,
       "options": {
@@ -1125,10 +1192,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 11,
         "w": 10,
         "x": 10,
-        "y": 11
+        "y": 12
       },
       "id": 10,
       "options": {
@@ -1170,5 +1237,5 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "R0qM1YMnz",
-  "version": 22
+  "version": 29
 }
