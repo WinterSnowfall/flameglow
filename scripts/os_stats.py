@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.30
-@date: 15/08/2021
+@version: 1.40
+@date: 21/08/2021
 
 Warning: Built for use with python 3.6+
 '''
@@ -212,8 +212,12 @@ class os_stats:
                 #use the nvidia-smi utility to parse temperature for nvidia
                 nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
                                                    capture_output=True, text=True)
-                #multiply by 1000 to align with sys sensor readings default format
-                self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
+                try:
+                    #multiply by 1000 to align with sys sensor readings default format
+                    self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
+                except ValueError:
+                    self.gpu_temp = 0
+                    logger.warning('Nvidia SMI could not communicate with the Nvidia driver.')
                 
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
                 
