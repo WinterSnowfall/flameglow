@@ -209,13 +209,14 @@ class os_stats:
                 
             #/sys/class/drm/card*/device/hwmon/hwmon1/temp1_input parsing
             if self._gpu_type == 'nvidia':
-                #use the nvidia-smi utility to parse temperature for nvidia
-                nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
-                                                   capture_output=True, text=True)
                 try:
+                    #use the nvidia-smi utility to parse temperature for nvidia
+                    nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
+                                                       capture_output=True, text=True, check=True)
+                
                     #multiply by 1000 to align with sys sensor readings default format
                     self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
-                except ValueError:
+                except:
                     self.gpu_temp = 0
                     logger.warning('Nvidia SMI could not communicate with the Nvidia driver.')
                 
