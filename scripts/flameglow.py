@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.50
-@date: 23/09/2021
+@version: 1.60
+@date: 30/11/2021
 
 Warning: Built for use with python 3.6+
 '''
@@ -46,6 +46,7 @@ if __name__ == '__main__':
         PROMETHEUS_CLIENT_PORT = general_section.getint('prometheus_client_port')
         STATS_COLLECTION_INTERVAL = general_section.getint('collection_interval')
         NET_INTF_NAME = general_section.get('network_interface_name')
+        IO_DEV_NAME = general_section.get('io_device_name')
         HOST_TYPE = general_section.get('host_type')
         GPU_TYPE = general_section.get('gpu_type')
         LOGGING_LEVEL = general_section.get('logging_level')
@@ -62,6 +63,8 @@ if __name__ == '__main__':
     proc_stats_uptime = Gauge('proc_stats_uptime', 'System uptime in seconds')
     proc_stats_rec_rate = Gauge('proc_stats_rec_rate', 'Bytes received on the specified network interface')
     proc_stats_trans_rate = Gauge('proc_stats_trans_rate', 'Byes transmitted on the specified network interface')
+    proc_stats_io_read_rate = Gauge('proc_stats_io_read_rate', 'Bytes read on the specified io device')
+    proc_stats_io_write_rate = Gauge('proc_stats_io_write_rate', 'Bytes written on the specified io device')
     #------------------------------------------------------------------------------------------------------------
     #
     #---------------------- sys_stats ---------------------------------------------------------------------------
@@ -78,6 +81,7 @@ if __name__ == '__main__':
     
     os_stats_inst = os_stats(HOST_TYPE, GPU_TYPE, LOGGING_LEVEL)
     os_stats_inst.set_net_intf_name(NET_INTF_NAME)
+    os_stats_inst.set_io_device_name(IO_DEV_NAME)
     
     while True:
         try:
@@ -90,6 +94,8 @@ if __name__ == '__main__':
             #always report average rates per second, regardless of collection interval
             proc_stats_rec_rate.set(os_stats_inst.net_rec_rate / STATS_COLLECTION_INTERVAL)
             proc_stats_trans_rate.set(os_stats_inst.net_trans_rate / STATS_COLLECTION_INTERVAL)
+            proc_stats_io_read_rate.set(os_stats_inst.io_bytes_read / STATS_COLLECTION_INTERVAL)
+            proc_stats_io_write_rate.set(os_stats_inst.io_bytes_written / STATS_COLLECTION_INTERVAL)
             
             sys_stats_cpu_package_temp.set(os_stats_inst.cpu_package_temp)
             if GPU_TYPE in SUPPORTED_GPU_TYPES:

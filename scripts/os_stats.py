@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.50
-@date: 23/09/2021
+@version: 1.60
+@date: 30/11/2021
 
 Warning: Built for use with python 3.6+
 '''
@@ -28,11 +28,14 @@ PROC_LOADAVG_PATH = '/proc/loadavg'
 PROC_MEMINFO_PATH = '/proc/meminfo'
 PROC_UPTIME_PATH = '/proc/uptime'
 PROC_NET_DEV_PATH = '/proc/net/dev'
+PROC_IO_DEV_PATH = '/proc/diskstats'
 
 SYS_RASPBERRY_PI_HOST_TYPE = 'raspberrypi'
 SYS_CPU_THERMAL_ZONE_TYPE_PI = 'cpu-thermal'
 SYS_CPU_THERMAL_ZONE_TYPE_GENERIC = 'x86_pkg_temp'
 SYS_GPU_AMD_CARD_TYPE = 'amdgpu'
+
+IO_SECTOR_SIZE = 512
 
 NVIDIA_GPU_TEMP_COMMAND = 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader'
 
@@ -48,6 +51,12 @@ class os_stats:
         self._net_intf_bytes_rec = 0
         self._net_intf_bytes_trans = 0
         
+        self._io_device_name = None
+        self._io_device_sectors_read_prev = None
+        self._io_device_sectors_written_prev = None
+        self._io_device_sectors_read = 0
+        self._io_device_sectors_written = 0
+        
         self._thermal_zone_identifier = 0
         self._gpu_card_identifier = 0
         
@@ -56,6 +65,8 @@ class os_stats:
         self.uptime = 0
         self.net_rec_rate = 0
         self.net_trans_rate = 0
+        self.io_bytes_read = 0
+        self.io_bytes_written = 0
         
         self.cpu_package_temp = 0
         self.gpu_temp = 0
@@ -79,6 +90,9 @@ class os_stats:
     
     def set_net_intf_name(self, net_intf_name):
         self._net_intf_name = net_intf_name
+        
+    def set_io_device_name(self, io_device_name):
+        self._io_device_name = io_device_name
     
     def detect_thermal_zone_path(self):
         logger.info(f'Detecting CPU package thermal zone for {self._host_type} host type...')
@@ -130,11 +144,16 @@ class os_stats:
         self._net_intf_bytes_rec = 0
         self._net_intf_bytes_trans = 0
         
+        self._io_device_sectors_read = 0
+        self._io_device_sectors_written = 0
+        
         self.avg_cpu_usage = 0
         self.memory_load = 0
         self.uptime = 0
         self.net_rec_rate = 0
         self.net_trans_rate = 0
+        self.io_bytes_read = 0
+        self.io_bytes_written = 0
         
         self.cpu_package_temp = 0
         
@@ -200,6 +219,38 @@ class os_stats:
                 
                 logger.debug(f'net_rec_rate: {self.net_rec_rate}')
                 logger.debug(f'net_trans_rate: {self.net_trans_rate}')
+                
+            #/proc/diskstats file parsing
+            with open(PROC_IO_DEV_PATH, 'r') as io_dev:
+                for line in io_dev.read().splitlines():
+                    if self._io_device_name in line.lstrip():
+                        intf_line = line.split()
+                        self._io_device_sectors_read = int(intf_line[3])
+                        self._io_device_sectors_written =  int(intf_line[7])
+                        break
+                
+                logger.debug(f'_io_device_sectors_read: {self._io_device_sectors_read}')
+                logger.debug(f'_io_device_sectors_written: {self._io_device_sectors_written}')
+                
+                logger.debug(f'_io_device_sectors_read_prev: {self._io_device_sectors_read_prev}')
+                logger.debug(f'_io_device_sectors_written_prev: {self._io_device_sectors_written_prev}')
+                
+                #won't do a delta on the first pass, so return 0
+                if self._io_device_sectors_read_prev is None and self._io_device_sectors_written_prev is None:
+                    self.io_bytes_read = 0
+                    self.io_bytes_written = 0
+                else:
+                    self.io_bytes_read = (self._io_device_sectors_read - 
+                                          self._io_device_sectors_read_prev) * IO_SECTOR_SIZE
+                    self.io_bytes_written = (self._io_device_sectors_written - 
+                                             self._io_device_sectors_written_prev) * IO_SECTOR_SIZE
+
+                #setup delta for next iteration
+                self._io_device_sectors_read_prev = self._io_device_sectors_read
+                self._io_device_sectors_written_prev = self._io_device_sectors_written
+                
+                logger.debug(f'io_bytes_read: {self.io_bytes_read}')
+                logger.debug(f'io_bytes_written: {self.io_bytes_written}')
                 
             #/sys/class/thermal/thermal_zone*/temp parsing
             with open(f'/sys/class/thermal/thermal_zone{self._thermal_zone_identifier}/temp', 'r') as temp:
