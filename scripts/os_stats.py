@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.60
-@date: 30/11/2021
+@version: 1.70
+@date: 23/12/2021
 
 Warning: Built for use with python 3.6+
 '''
@@ -16,7 +16,7 @@ import traceback
 
 ##logging configuration block
 log_file_full_path = os.path.join('..', 'logs', 'os_stats.log')
-logger_file_handler = RotatingFileHandler(log_file_full_path, maxBytes=104857600, backupCount=2, encoding='utf-8')
+logger_file_handler = RotatingFileHandler(log_file_full_path, maxBytes=16777216, backupCount=2, encoding='utf-8')
 logger_format = '%(asctime)s %(levelname)s : %(name)s >>> %(message)s'
 logger_file_handler.setFormatter(logging.Formatter(logger_format))
 #logging level for other modules
@@ -225,8 +225,9 @@ class os_stats:
                 for line in io_dev.read().splitlines():
                     if self._io_device_name in line.lstrip():
                         intf_line = line.split()
-                        self._io_device_sectors_read = int(intf_line[3])
-                        self._io_device_sectors_written =  int(intf_line[7])
+                        #offset fields by 2 compared to documentation descriptions
+                        self._io_device_sectors_read = int(intf_line[5])
+                        self._io_device_sectors_written =  int(intf_line[9])
                         break
                 
                 logger.debug(f'_io_device_sectors_read: {self._io_device_sectors_read}')
