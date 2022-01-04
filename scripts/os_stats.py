@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.70
-@date: 23/12/2021
+@version: 1.80
+@date: 04/01/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -59,6 +59,7 @@ class os_stats:
         
         self._thermal_zone_identifier = 0
         self._gpu_card_identifier = 0
+        self._hwmon_folder_identifier = 0
         
         self.avg_cpu_usage = 0
         self.memory_load = 0
@@ -110,12 +111,12 @@ class os_stats:
                         if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_PI:
                             self._thermal_zone_identifier = i
                             logger.info('Succesfully detected CPU package thermal zone.')
-                            break
+                            return
                     else:
                         if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_GENERIC:
                             self._thermal_zone_identifier = i
                             logger.info('Succesfully detected CPU package thermal zone.')
-                            break
+                            return
         except:
             logger.critical('Thermal zones have been exhausted without detection.')
             raise
@@ -126,16 +127,26 @@ class os_stats:
         try:
             #if you have a system with more than 2 GPUs, this tool is not for you anyway
             for i in range(0, 2):
-                logger.debug(f'Atempting AMD GPU card detection for: {i}...')
+                logger.debug(f'Atempting AMD GPU card detection for card: {i}...')
                 
-                with open(f'/sys/class/drm/card{i}/device/hwmon/hwmon1/name', 'r') as card_name:
-                    detected_card_name = card_name.read().strip()
-                    logger.debug(f'detected_card_name: {detected_card_name}')
-                    
-                    if detected_card_name == SYS_GPU_AMD_CARD_TYPE:
-                        self._gpu_card_identifier = i
-                        logger.info('Succesfully detected AMD GPU card.')
-                        break
+                #I have no idea how the hwmon folder indexes are calculated,
+                #though I thought they were static, apparently they are not...
+                for j in range (0, 10):
+                    logger.debug(f'Atempting AMD GPU card detection for hwmon: {j}...')
+                
+                    try:
+                        with open(f'/sys/class/drm/card{i}/device/hwmon/hwmon{j}/name', 'r') as card_name:
+                            detected_card_name = card_name.read().strip()
+                            logger.debug(f'detected_card_name: {detected_card_name}')
+                            
+                            if detected_card_name == SYS_GPU_AMD_CARD_TYPE:
+                                self._gpu_card_identifier = i
+                                self._hwmon_folder_identifier = j
+                                logger.info('Succesfully detected AMD GPU card.')
+                                return
+                            
+                    except FileNotFoundError:
+                        logger.debug(f'File not found for card {i} and hwmon {j}.')
         except:
             logger.critical('DRM cards have been exhausted without detection.')
             raise
@@ -259,7 +270,7 @@ class os_stats:
                     
                 logger.debug(f'cpu_package_temp: {self.cpu_package_temp}')
                 
-            #/sys/class/drm/card*/device/hwmon/hwmon1/temp1_input parsing
+            #nvidia-smi command output parsing
             if self._gpu_type == 'nvidia':
                 try:
                     #use the nvidia-smi utility to parse temperature for nvidia
@@ -274,8 +285,10 @@ class os_stats:
                 
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
                 
+            #/sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
             elif self._gpu_type == 'amd':
-                with open(f'/sys/class/drm/card{self._gpu_card_identifier}/device/hwmon/hwmon1/temp1_input', 
+                with open(f'/sys/class/drm/card{self._gpu_card_identifier}/device'
+                          f'/hwmon/hwmon{self._hwmon_folder_identifier}/temp1_input', 
                           'r') as temp:
                     self.gpu_temp = int(temp.read())
                     
