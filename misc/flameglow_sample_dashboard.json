@@ -98,21 +98,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -240,6 +225,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -329,21 +329,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -471,6 +456,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -692,21 +692,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -834,6 +819,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -922,21 +922,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -1064,6 +1049,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1152,21 +1152,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -1294,6 +1279,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1382,21 +1382,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "hades"
             },
             "properties": [
@@ -1528,6 +1513,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nyx"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1576,6 +1576,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "flameglow",
-  "uid": "9kKOhTcnk",
-  "version": 27
+  "uid": "_EuMCFT7z",
+  "version": 5
 }

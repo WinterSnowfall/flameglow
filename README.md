@@ -7,7 +7,7 @@ A basic Linux OS stats collection agent/Prometheus client meant to serve as code
 
 **-** You will need a **python3.6+** environment. Most Linux distros will come with python3 installed - make sure you pick one which comes with **python 3.6** or above.
 
-**-** The following python3 package needs to be installed: `prometheus_client (& dependencies)`. I leave the details up to you. As long as they're in the PYTHONPATH, chiatter will not complain.
+**-** The following python3 package needs to be installed: `prometheus_client` (& dependencies). I leave the details up to you. As long as they're in the PYTHONPATH, flameglow will not complain.
 
 **-** HTTP port 8180 must be open for business (firewalls included), since the Prometheus server will need to access it in order to scrape and aggregate all the stats.
 
