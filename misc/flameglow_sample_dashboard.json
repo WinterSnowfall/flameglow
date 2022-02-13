@@ -188,21 +188,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -233,13 +218,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -275,6 +275,7 @@
         }
       ],
       "title": "CPU Usage (Average Core Load)",
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -419,21 +420,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -464,13 +450,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -516,8 +517,8 @@
           },
           "decimals": 1,
           "mappings": [],
-          "max": 90,
-          "min": 20,
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -583,8 +584,8 @@
           },
           "decimals": 1,
           "mappings": [],
-          "max": 90,
-          "min": 20,
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -598,7 +599,7 @@
               },
               {
                 "color": "semi-dark-red",
-                "value": 70
+                "value": 80
               }
             ]
           },
@@ -782,21 +783,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -827,13 +813,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1012,21 +1013,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -1057,13 +1043,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1242,21 +1243,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -1287,13 +1273,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1472,21 +1473,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "caliban"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "titania"
             },
             "properties": [
@@ -1517,13 +1503,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "nyx"
+              "options": "erebus"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-orange",
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cerberus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1570,12 +1571,12 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "flameglow",
-  "uid": "_EuMCFT7z",
-  "version": 5
+  "uid": "rlF1aQ-nz",
+  "version": 13
 }
