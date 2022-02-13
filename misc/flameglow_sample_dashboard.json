@@ -1563,7 +1563,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -1578,5 +1578,5 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "rlF1aQ-nz",
-  "version": 13
+  "version": 15
 }
