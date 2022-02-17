@@ -523,12 +523,20 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-green",
+                "color": "semi-dark-blue",
                 "value": null
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 40
               },
               {
                 "color": "semi-dark-yellow",
                 "value": 60
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 70
               },
               {
                 "color": "semi-dark-red",
@@ -590,12 +598,20 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-green",
+                "color": "semi-dark-blue",
                 "value": null
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 40
               },
               {
                 "color": "semi-dark-yellow",
                 "value": 60
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 70
               },
               {
                 "color": "semi-dark-red",
@@ -1577,6 +1593,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "flameglow",
-  "uid": "rlF1aQ-nz",
-  "version": 15
+  "uid": "C0XW79a7k",
+  "version": 9
 }
