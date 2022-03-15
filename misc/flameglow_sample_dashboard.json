@@ -1,11 +1,27 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": [],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.1.0-29505pre"
+      "version": "8.5.0-52524pre"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
     },
     {
       "type": "panel",
@@ -40,13 +56,13 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -104,7 +120,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -179,7 +195,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -210,36 +226,6 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -261,7 +247,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.0-29505pre",
@@ -279,7 +266,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -301,8 +287,7 @@
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
-              "log": 2,
-              "type": "log"
+              "type": "linear"
             },
             "showPoints": "auto",
             "spanNulls": false,
@@ -324,7 +309,7 @@
               }
             ]
           },
-          "unit": "kbytes"
+          "unit": "gbytes"
         },
         "overrides": [
           {
@@ -336,7 +321,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -411,7 +396,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -446,36 +431,6 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
@@ -493,13 +448,18 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
-          "expr": "proc_stats_memory_load{}",
+          "expr": "proc_stats_memory_load{} / 1048576",
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -509,7 +469,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -570,7 +529,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0-29505pre",
+      "pluginVersion": "8.5.0-52524pre",
       "targets": [
         {
           "exemplar": true,
@@ -584,7 +543,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -645,7 +603,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0-29505pre",
+      "pluginVersion": "8.5.0-52524pre",
       "targets": [
         {
           "exemplar": true,
@@ -659,7 +617,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -715,7 +672,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -790,7 +747,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -821,36 +778,6 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -872,7 +799,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.0-29505pre",
@@ -889,7 +817,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -945,7 +872,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1020,7 +947,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1051,36 +978,6 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1102,7 +999,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.0-29505pre",
@@ -1119,7 +1017,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1175,7 +1072,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1250,7 +1147,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1281,36 +1178,6 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1332,7 +1199,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.0-29505pre",
@@ -1349,7 +1217,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1405,7 +1272,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1480,7 +1347,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "text",
+                  "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -1515,36 +1382,6 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "cerberus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
@@ -1562,7 +1399,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.0-29505pre",
@@ -1580,7 +1418,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 30,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1594,5 +1432,6 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "C0XW79a7k",
-  "version": 9
+  "version": 3,
+  "weekStart": ""
 }
