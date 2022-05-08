@@ -1,0 +1,14 @@
+[Unit]
+Description=flameglow data collection agent
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=username
+StandardOutput=null
+WorkingDirectory=/home/username/flameglow/bin
+ExecStart=/home/username/flameglow/bin/flameglow
+
+[Install]
+WantedBy=multi-user.target
+
