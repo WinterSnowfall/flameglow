@@ -6,8 +6,8 @@ After=syslog.target network.target
 Type=simple
 User=username
 StandardOutput=null
-WorkingDirectory=/home/username/flameglow/bin
-ExecStart=/home/username/flameglow/bin/flameglow
+WorkingDirectory=/home/username/flameglow/scripts
+ExecStart=/home/username/flameglow/scripts/flameglow.py
 
 [Install]
 WantedBy=multi-user.target
