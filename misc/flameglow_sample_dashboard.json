@@ -9,13 +9,13 @@
       "pluginName": "Prometheus"
     }
   ],
-  "__elements": [],
+  "__elements": {},
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.5.0-52524pre"
+      "version": "9.1.0-72504pre"
     },
     {
       "type": "datasource",
@@ -40,7 +40,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -63,12 +66,18 @@
   "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -254,6 +263,10 @@
       "pluginVersion": "8.1.0-29505pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "proc_stats_avg_cpu_usage{}",
           "interval": "",
@@ -262,16 +275,41 @@
         }
       ],
       "title": "CPU Usage (Average Core Load)",
-      "transformations": [],
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -466,9 +504,33 @@
         }
       ],
       "title": "Total RAM Usage",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -527,11 +589,15 @@
           "values": false
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
-      "pluginVersion": "8.5.0-52524pre",
+      "pluginVersion": "9.1.0-72504pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "sys_stats_gpu_temp{} / 1000",
           "interval": "",
@@ -540,9 +606,26 @@
         }
       ],
       "title": "GPU Temperature",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "ghost"
+              ]
+            }
+          }
+        }
+      ],
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -601,11 +684,15 @@
           "values": false
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
-      "pluginVersion": "8.5.0-52524pre",
+      "pluginVersion": "9.1.0-72504pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "sys_stats_cpu_package_temp{} / 1000",
           "interval": "",
@@ -614,15 +701,41 @@
         }
       ],
       "title": "CPU Package Temperature",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -806,6 +919,10 @@
       "pluginVersion": "8.1.0-29505pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "proc_stats_rec_rate{}",
           "interval": "",
@@ -814,15 +931,41 @@
         }
       ],
       "title": "Incoming Traffic (Average Rate)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1006,6 +1149,10 @@
       "pluginVersion": "8.1.0-29505pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "proc_stats_trans_rate{}",
           "interval": "",
@@ -1014,15 +1161,41 @@
         }
       ],
       "title": "Outgoing Traffic (Average Rate)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1206,6 +1379,10 @@
       "pluginVersion": "8.1.0-29505pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "proc_stats_io_read_rate{}",
           "interval": "",
@@ -1214,15 +1391,41 @@
         }
       ],
       "title": "I/O Reads (Average Rate)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1406,6 +1609,10 @@
       "pluginVersion": "8.1.0-29505pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "proc_stats_io_write_rate{}",
           "interval": "",
@@ -1414,11 +1621,31 @@
         }
       ],
       "title": "I/O Writes (Average Rate)",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "deimos",
+                "titania",
+                "oberon",
+                "ghost",
+                "hades",
+                "pluto",
+                "charon",
+                "phobos"
+              ]
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 35,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1432,6 +1659,6 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "C0XW79a7k",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
