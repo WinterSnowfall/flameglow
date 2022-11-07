@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.1.0-72504pre"
+      "version": "9.2.1"
     },
     {
       "type": "datasource",
@@ -239,6 +239,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -253,7 +268,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -469,6 +485,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -483,7 +514,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -591,7 +623,7 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.1.0-72504pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
           "datasource": {
@@ -613,6 +645,7 @@
             "include": {
               "names": [
                 "Time",
+                "erebus",
                 "ghost"
               ]
             }
@@ -686,7 +719,7 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.1.0-72504pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
           "datasource": {
@@ -711,11 +744,12 @@
                 "deimos",
                 "titania",
                 "oberon",
-                "ghost",
+                "erebus",
                 "hades",
                 "pluto",
                 "charon",
-                "phobos"
+                "phobos",
+                "ghost"
               ]
             }
           }
@@ -895,6 +929,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -909,7 +958,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1125,6 +1175,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1139,7 +1204,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1355,6 +1421,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1369,7 +1450,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1585,6 +1667,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1599,7 +1696,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1645,7 +1743,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 36,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1659,6 +1757,6 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "C0XW79a7k",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }

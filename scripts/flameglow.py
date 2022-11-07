@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.80
-@date: 04/01/2022
+@version: 1.81
+@date: 06/11/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -105,5 +105,9 @@ if __name__ == '__main__':
             
         except KeyboardInterrupt:
             break
+        
+        except:
+            print('Critical error encountered. Data collection will now halt.')
+            raise SystemExit(2)
 
     print(f'\n\nThank you for using flameglow. Bye!')

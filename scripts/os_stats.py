@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.80
-@date: 04/01/2022
+@version: 1.81
+@date: 06/11/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -12,11 +12,11 @@ import os
 import subprocess
 from logging.handlers import RotatingFileHandler
 #uncomment for debugging purposes only
-import traceback
+#import traceback
 
 ##logging configuration block
 log_file_full_path = os.path.join('..', 'logs', 'os_stats.log')
-logger_file_handler = RotatingFileHandler(log_file_full_path, maxBytes=16777216, backupCount=2, encoding='utf-8')
+logger_file_handler = RotatingFileHandler(log_file_full_path, maxBytes=25165824, backupCount=1, encoding='utf-8')
 logger_format = '%(asctime)s %(levelname)s : %(name)s >>> %(message)s'
 logger_file_handler.setFormatter(logging.Formatter(logger_format))
 #logging level for other modules
@@ -298,7 +298,7 @@ class os_stats:
                 
         except:
             #uncomment for debugging purposes only
-            logger.error(traceback.format_exc())
+            #logger.error(traceback.format_exc())
             raise
             
         logger.info('--- Data collection complete ---')
