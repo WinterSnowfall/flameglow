@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.81
-@date: 06/11/2022
+@version: 1.82
+@date: 12/11/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -296,9 +296,10 @@ class os_stats:
             else:
                 logger.debug('No supported GPU type detected. Skipping GPU temp collection.')
                 
+            logger.info('--- Data collection complete ---')
+            
         except:
+            logger.warning('Data collection has encountered an exception.')
             #uncomment for debugging purposes only
             #logger.error(traceback.format_exc())
             raise
-            
-        logger.info('--- Data collection complete ---')

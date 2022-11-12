@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.81
-@date: 06/11/2022
+@version: 1.82
+@date: 12/11/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -83,31 +83,30 @@ if __name__ == '__main__':
     os_stats_inst.set_net_intf_name(NET_INTF_NAME)
     os_stats_inst.set_io_device_name(IO_DEV_NAME)
     
-    while True:
-        try:
-            os_stats_inst.clear_stats()
-            os_stats_inst.collect_stats()
-            
-            proc_stats_avg_cpu_usage.set(os_stats_inst.avg_cpu_usage)
-            proc_stats_memory_load.set(os_stats_inst.memory_load)
-            proc_stats_uptime.set(os_stats_inst.uptime)
-            #always report average rates per second, regardless of collection interval
-            proc_stats_rec_rate.set(os_stats_inst.net_rec_rate / STATS_COLLECTION_INTERVAL)
-            proc_stats_trans_rate.set(os_stats_inst.net_trans_rate / STATS_COLLECTION_INTERVAL)
-            proc_stats_io_read_rate.set(os_stats_inst.io_bytes_read / STATS_COLLECTION_INTERVAL)
-            proc_stats_io_write_rate.set(os_stats_inst.io_bytes_written / STATS_COLLECTION_INTERVAL)
-            
-            sys_stats_cpu_package_temp.set(os_stats_inst.cpu_package_temp)
-            if GPU_TYPE in SUPPORTED_GPU_TYPES:
-                sys_stats_gpu_temp.set(os_stats_inst.gpu_temp)
-            
-            sleep(STATS_COLLECTION_INTERVAL)
-            
-        except KeyboardInterrupt:
-            break
-        
-        except:
-            print('Critical error encountered. Data collection will now halt.')
-            raise SystemExit(2)
+    try:
+        while True:
+            try:
+                os_stats_inst.collect_stats()
+                
+                proc_stats_avg_cpu_usage.set(os_stats_inst.avg_cpu_usage)
+                proc_stats_memory_load.set(os_stats_inst.memory_load)
+                proc_stats_uptime.set(os_stats_inst.uptime)
+                #always report average rates per second, regardless of collection interval
+                proc_stats_rec_rate.set(os_stats_inst.net_rec_rate / STATS_COLLECTION_INTERVAL)
+                proc_stats_trans_rate.set(os_stats_inst.net_trans_rate / STATS_COLLECTION_INTERVAL)
+                proc_stats_io_read_rate.set(os_stats_inst.io_bytes_read / STATS_COLLECTION_INTERVAL)
+                proc_stats_io_write_rate.set(os_stats_inst.io_bytes_written / STATS_COLLECTION_INTERVAL)
+                
+                sys_stats_cpu_package_temp.set(os_stats_inst.cpu_package_temp)
+                if GPU_TYPE in SUPPORTED_GPU_TYPES:
+                    sys_stats_gpu_temp.set(os_stats_inst.gpu_temp)
+                
+                sleep(STATS_COLLECTION_INTERVAL)
+
+            except:
+                os_stats_inst.clear_stats()
+                    
+    except KeyboardInterrupt:
+        pass
 
     print(f'\n\nThank you for using flameglow. Bye!')
