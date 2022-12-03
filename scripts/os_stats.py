@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.82
-@date: 12/11/2022
+@version: 1.90
+@date: 02/12/2022
 
 Warning: Built for use with python 3.6+
 '''
@@ -80,77 +80,76 @@ class os_stats:
         
         self._host_type = host_type
         self._gpu_type = gpu_type
-            
+        
         #logging level for current logger
         logger.setLevel(self._logging_level)
         
         self.detect_thermal_zone_path()
-    
+        
         if self._gpu_type == 'amd':
             self.detect_amd_gpu_path()
     
     def set_net_intf_name(self, net_intf_name):
         self._net_intf_name = net_intf_name
-        
+    
     def set_io_device_name(self, io_device_name):
         self._io_device_name = io_device_name
     
     def detect_thermal_zone_path(self):
         logger.info(f'Detecting CPU package thermal zone for {self._host_type} host type...')
         
-        try:
-            #how many thermal zones can a system have?
-            for i in range(0, 100):
-                logger.debug(f'Atempting CPU package thermal zone detection for: {i}...')
-                
-                with open(f'/sys/class/thermal/thermal_zone{i}/type', 'r') as zone_type:
-                    detected_zone_type = zone_type.read().strip()
-                    logger.debug(f'detected_zone_type: {detected_zone_type}')
-                    
-                    if self._host_type == SYS_RASPBERRY_PI_HOST_TYPE:
-                        if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_PI:
-                            self._thermal_zone_identifier = i
-                            logger.info('Succesfully detected CPU package thermal zone.')
-                            return
-                    else:
-                        if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_GENERIC:
-                            self._thermal_zone_identifier = i
-                            logger.info('Succesfully detected CPU package thermal zone.')
-                            return
-        except:
-            logger.critical('Thermal zones have been exhausted without detection.')
-            raise
+        thermal_zone_no = 0
         
+        while os.path.exists(f'/sys/class/thermal/thermal_zone{thermal_zone_no}'):
+            logger.debug(f'Atempting CPU package thermal zone detection for: {thermal_zone_no}...')
+            
+            with open(f'/sys/class/thermal/thermal_zone{thermal_zone_no}/type', 'r') as zone_type:
+                detected_zone_type = zone_type.read().strip()
+                logger.debug(f'detected_zone_type: {detected_zone_type}')
+                
+                if self._host_type != SYS_RASPBERRY_PI_HOST_TYPE:
+                    if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_GENERIC:
+                        self._thermal_zone_identifier = thermal_zone_no
+                        logger.info('Succesfully detected CPU package thermal zone.')
+                        return
+                else:
+                    if detected_zone_type == SYS_CPU_THERMAL_ZONE_TYPE_PI:
+                        self._thermal_zone_identifier = thermal_zone_no
+                        logger.info('Succesfully detected CPU package thermal zone.')
+                        return
+                
+                thermal_zone_no += 1
+        
+        #early returns in case of detection will guarantee this is only hit when something goes wrong
+        logger.critical('Thermal zones have been exhausted without detection.')
+        raise SystemExit(2)
+    
     def detect_amd_gpu_path(self):
         logger.info(f'Detecting GPU package thermal zone for {self._gpu_type} GPU type...')
-                 
-        try:
-            #if you have a system with more than 2 GPUs, this tool is not for you anyway
-            for i in range(0, 2):
-                logger.debug(f'Atempting AMD GPU card detection for card: {i}...')
+        
+        card_no = 0
+        hwmon_no = 0
+        
+        while os.path.exists(f'/sys/class/drm/card{card_no}'):
+            logger.debug(f'Atempting AMD GPU card detection for card: {card_no}...')
+            
+            while os.path.exists(f'sys/class/drm/card{card_no}/device/hwmon/hwmon{hwmon_no}'):
+                logger.debug(f'Atempting AMD GPU card detection for hwmon: {hwmon_no}...')
                 
-                #I have no idea how the hwmon folder indexes are calculated,
-                #though I thought they were static, apparently they are not...
-                for j in range (0, 10):
-                    logger.debug(f'Atempting AMD GPU card detection for hwmon: {j}...')
-                
-                    try:
-                        with open(f'/sys/class/drm/card{i}/device/hwmon/hwmon{j}/name', 'r') as card_name:
-                            detected_card_name = card_name.read().strip()
-                            logger.debug(f'detected_card_name: {detected_card_name}')
-                            
-                            if detected_card_name == SYS_GPU_AMD_CARD_TYPE:
-                                self._gpu_card_identifier = i
-                                self._hwmon_folder_identifier = j
-                                logger.info('Succesfully detected AMD GPU card.')
-                                return
-                            
-                    except FileNotFoundError:
-                        logger.debug(f'File not found for card {i} and hwmon {j}.')
-        except:
-            logger.critical('DRM cards have been exhausted without detection.')
-            raise
-                 
+                with open(f'/sys/class/drm/card{card_no}/device/hwmon/hwmon{hwmon_no}/name', 'r') as card_name:
+                    detected_card_name = card_name.read().strip()
+                    logger.debug(f'detected_card_name: {detected_card_name}')
+                    
+                    if detected_card_name == SYS_GPU_AMD_CARD_TYPE:
+                        self._gpu_card_identifier = card_no
+                        self._hwmon_folder_identifier = hwmon_no
+                        logger.info('Succesfully detected AMD GPU card.')
+                        return
+        
+        #early returns in case of detection will guarantee this is only hit when something goes wrong
+        logger.critical('DRM cards have been exhausted without detection.')
+        raise SystemExit(3)
+    
     def clear_stats(self):
         self._net_intf_bytes_rec = 0
         self._net_intf_bytes_trans = 0
@@ -167,9 +166,9 @@ class os_stats:
         self.io_bytes_written = 0
         
         self.cpu_package_temp = 0
-        
+    
     def collect_stats(self):
-        logger.info('+++ Starting data collection run +++')
+        logger.info('***** Starting data collection run *****')
         
         try:
             #/proc/loadavg file parsing
@@ -177,7 +176,7 @@ class os_stats:
                 self.avg_cpu_usage = loadavg.read().split()[0]
                 
                 logger.debug(f'avg_cpu_usage: {self.avg_cpu_usage}')
-                
+            
             #/proc/meminfo file parsing
             with open(PROC_MEMINFO_PATH, 'r') as meminfo:
                 memory_total = 0
@@ -190,29 +189,29 @@ class os_stats:
                         memory_available = line.split(':')[1].strip().split()[0]
                     if memory_total != 0 and memory_available != 0:
                         break
-                        
+                
                 self.memory_load = int(memory_total) - int(memory_available)
                 
                 logger.debug(f'memory_load: {self.memory_load}')
-                
+            
             #/proc/uptime file parsing
             with open(PROC_UPTIME_PATH, 'r') as uptime:
                 self.uptime = int(float(uptime.read().split()[0]))
                 
                 logger.debug(f'uptime: {self.uptime}')
-                
+            
             #/proc/net/dev file parsing
             with open(PROC_NET_DEV_PATH, 'r') as net_dev:
                 for line in net_dev.read().splitlines():
                     if line.lstrip().startswith(self._net_intf_name):
                         intf_line = line.split(':')[1].split()
                         self._net_intf_bytes_rec = int(intf_line[0])
-                        self._net_intf_bytes_trans =  int(intf_line[8])
+                        self._net_intf_bytes_trans = int(intf_line[8])
                         break
-                    
+                
                 logger.debug(f'_net_intf_bytes_rec: {self._net_intf_bytes_rec}')
                 logger.debug(f'_net_intf_bytes_trans: {self._net_intf_bytes_trans}')
-                    
+                
                 logger.debug(f'_net_intf_bytes_rec_prev: {self._net_intf_bytes_rec_prev}')
                 logger.debug(f'_net_intf_bytes_trans_prev: {self._net_intf_bytes_trans_prev}')
                 
@@ -230,15 +229,15 @@ class os_stats:
                 
                 logger.debug(f'net_rec_rate: {self.net_rec_rate}')
                 logger.debug(f'net_trans_rate: {self.net_trans_rate}')
-                
+            
             #/proc/diskstats file parsing
             with open(PROC_IO_DEV_PATH, 'r') as io_dev:
                 for line in io_dev.read().splitlines():
-                    if self._io_device_name in line.lstrip():
+                    if self._io_device_name in line:
                         intf_line = line.split()
                         #offset fields by 2 compared to documentation descriptions
                         self._io_device_sectors_read = int(intf_line[5])
-                        self._io_device_sectors_written =  int(intf_line[9])
+                        self._io_device_sectors_written = int(intf_line[9])
                         break
                 
                 logger.debug(f'_io_device_sectors_read: {self._io_device_sectors_read}')
@@ -256,27 +255,27 @@ class os_stats:
                                           self._io_device_sectors_read_prev) * IO_SECTOR_SIZE
                     self.io_bytes_written = (self._io_device_sectors_written - 
                                              self._io_device_sectors_written_prev) * IO_SECTOR_SIZE
-
+                
                 #setup delta for next iteration
                 self._io_device_sectors_read_prev = self._io_device_sectors_read
                 self._io_device_sectors_written_prev = self._io_device_sectors_written
                 
                 logger.debug(f'io_bytes_read: {self.io_bytes_read}')
                 logger.debug(f'io_bytes_written: {self.io_bytes_written}')
-                
+            
             #/sys/class/thermal/thermal_zone*/temp parsing
             with open(f'/sys/class/thermal/thermal_zone{self._thermal_zone_identifier}/temp', 'r') as temp:
                 self.cpu_package_temp = int(temp.read())
-                    
-                logger.debug(f'cpu_package_temp: {self.cpu_package_temp}')
                 
+                logger.debug(f'cpu_package_temp: {self.cpu_package_temp}')
+            
             #nvidia-smi command output parsing
             if self._gpu_type == 'nvidia':
                 try:
                     #use the nvidia-smi utility to parse temperature for nvidia
                     nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
                                                        capture_output=True, text=True, check=True)
-                
+                    
                     #multiply by 1000 to align with sys sensor readings default format
                     self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
                 except:
@@ -284,7 +283,7 @@ class os_stats:
                     logger.warning('Nvidia SMI could not communicate with the Nvidia driver.')
                 
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
-                
+            
             #/sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
             elif self._gpu_type == 'amd':
                 with open(f'/sys/class/drm/card{self._gpu_card_identifier}/device'
@@ -295,11 +294,11 @@ class os_stats:
                     logger.debug(f'gpu_temp: {self.gpu_temp}')
             else:
                 logger.debug('No supported GPU type detected. Skipping GPU temp collection.')
-                
-            logger.info('--- Data collection complete ---')
             
-        except:
-            logger.warning('Data collection has encountered an exception.')
+            logger.info('***** Data collection complete *****')
+        
+        except Exception as exception:
+            logger.error(f'Encountered following exception: {type(exception)} {exception}')
             #uncomment for debugging purposes only
             #logger.error(traceback.format_exc())
             raise
