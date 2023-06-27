@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.90
-@date: 02/12/2022
+@version: 1.92
+@date: 26/06/2023
 
 Warning: Built for use with python 3.6+
 '''
@@ -14,8 +14,8 @@ from time import sleep
 from prometheus_client import start_http_server, Gauge
 from os_stats import os_stats
 
-##conf file block
-conf_file_full_path = os.path.join('..', 'conf', 'flameglow.conf')
+# conf file block
+CONF_FILE_PATH = os.path.join('..', 'conf', 'flameglow.conf')
 
 SUPPORTED_GPU_TYPES = ('nvidia', 'amd')
 
@@ -30,9 +30,9 @@ def sigint_handler(signum, frame):
     raise SystemExit(0)
 
 if __name__ == '__main__':
-    #catch SIGTERM and exit gracefully
+    # catch SIGTERM and exit gracefully
     signal.signal(signal.SIGTERM, sigterm_handler)
-    #catch SIGINT and exit gracefully
+    # catch SIGINT and exit gracefully
     signal.signal(signal.SIGINT, sigint_handler)
     
     print(f'Starting flameglow - a simple POSIX proc system stat collection agent...\n\n')
@@ -40,10 +40,9 @@ if __name__ == '__main__':
     configParser = ConfigParser()
     
     try:
-        #reading from config file
-        configParser.read(conf_file_full_path)
+        configParser.read(CONF_FILE_PATH)
         general_section = configParser['GENERAL']
-        #parsing generic parameters
+        
         PROMETHEUS_CLIENT_PORT = general_section.getint('prometheus_client_port')
         STATS_COLLECTION_INTERVAL = general_section.getint('collection_interval')
         NET_INTF_NAME = general_section.get('network_interface_name')
@@ -76,7 +75,7 @@ if __name__ == '__main__':
     
     #############################################################################################################
     
-    #start a Prometheus http server thread to expose the metrics
+    # start a Prometheus http server thread to expose the metrics
     start_http_server(PROMETHEUS_CLIENT_PORT)
     
     os_stats_inst = os_stats(HOST_TYPE, GPU_TYPE, LOGGING_LEVEL)
@@ -92,7 +91,7 @@ if __name__ == '__main__':
             proc_stats_avg_cpu_usage.set(os_stats_inst.avg_cpu_usage)
             proc_stats_memory_load.set(os_stats_inst.memory_load)
             proc_stats_uptime.set(os_stats_inst.uptime)
-            #always report average rates per second, regardless of collection interval
+            # always report average rates per second, regardless of collection interval
             proc_stats_rec_rate.set(os_stats_inst.net_rec_rate / STATS_COLLECTION_INTERVAL)
             proc_stats_trans_rate.set(os_stats_inst.net_trans_rate / STATS_COLLECTION_INTERVAL)
             proc_stats_io_read_rate.set(os_stats_inst.io_bytes_read / STATS_COLLECTION_INTERVAL)

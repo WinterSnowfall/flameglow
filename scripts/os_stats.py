@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.90
-@date: 02/12/2022
+@version: 1.92
+@date: 26/06/2023
 
 Warning: Built for use with python 3.6+
 '''
@@ -11,16 +11,16 @@ import logging
 import os
 import subprocess
 from logging.handlers import RotatingFileHandler
-#uncomment for debugging purposes only
+# uncomment for debugging purposes only
 #import traceback
 
-##logging configuration block
-log_file_full_path = os.path.join('..', 'logs', 'os_stats.log')
-logger_file_handler = RotatingFileHandler(log_file_full_path, maxBytes=25165824, backupCount=1, encoding='utf-8')
-logger_format = '%(asctime)s %(levelname)s : %(name)s >>> %(message)s'
-logger_file_handler.setFormatter(logging.Formatter(logger_format))
-#logging level for other modules
-logging.basicConfig(format=logger_format, level=logging.ERROR)
+# logging configuration block
+LOG_FILE_PATH = os.path.join('..', 'logs', 'os_stats.log')
+logger_file_handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=25165824, backupCount=1, encoding='utf-8')
+LOGGER_FORMAT = '%(asctime)s %(levelname)s : %(name)s >>> %(message)s'
+logger_file_handler.setFormatter(logging.Formatter(LOGGER_FORMAT))
+# logging level for other modules
+logging.basicConfig(format=LOGGER_FORMAT, level=logging.ERROR)
 logger = logging.getLogger(__name__)
 logger.addHandler(logger_file_handler)
 
@@ -72,7 +72,7 @@ class os_stats:
         self.cpu_package_temp = 0
         self.gpu_temp = 0
         
-        #defaults to WARNING otherwise
+        # defaults to 'WARNING' otherwise
         if logging_level == 'DEBUG':
             self._logging_level = logging.DEBUG
         elif logging_level == 'INFO':
@@ -81,7 +81,7 @@ class os_stats:
         self._host_type = host_type
         self._gpu_type = gpu_type
         
-        #logging level for current logger
+        # logging level for current logger
         logger.setLevel(self._logging_level)
         
         self.detect_thermal_zone_path()
@@ -120,7 +120,7 @@ class os_stats:
                 
                 thermal_zone_no += 1
         
-        #early returns in case of detection will guarantee this is only hit when something goes wrong
+        # early returns in case of detection will guarantee this is only hit when something goes wrong
         logger.critical('Thermal zones have been exhausted without detection.')
         raise SystemExit(2)
     
@@ -146,7 +146,7 @@ class os_stats:
                         logger.info('Succesfully detected AMD GPU card.')
                         return
         
-        #early returns in case of detection will guarantee this is only hit when something goes wrong
+        # early returns in case of detection will guarantee this is only hit when something goes wrong
         logger.critical('DRM cards have been exhausted without detection.')
         raise SystemExit(3)
     
@@ -171,13 +171,13 @@ class os_stats:
         logger.info('***** Starting data collection run *****')
         
         try:
-            #/proc/loadavg file parsing
+            # /proc/loadavg file parsing
             with open(PROC_LOADAVG_PATH, 'r') as loadavg:
                 self.avg_cpu_usage = loadavg.read().split()[0]
                 
                 logger.debug(f'avg_cpu_usage: {self.avg_cpu_usage}')
             
-            #/proc/meminfo file parsing
+            # /proc/meminfo file parsing
             with open(PROC_MEMINFO_PATH, 'r') as meminfo:
                 memory_total = 0
                 memory_available = 0
@@ -194,13 +194,13 @@ class os_stats:
                 
                 logger.debug(f'memory_load: {self.memory_load}')
             
-            #/proc/uptime file parsing
+            # /proc/uptime file parsing
             with open(PROC_UPTIME_PATH, 'r') as uptime:
                 self.uptime = int(float(uptime.read().split()[0]))
                 
                 logger.debug(f'uptime: {self.uptime}')
             
-            #/proc/net/dev file parsing
+            # /proc/net/dev file parsing
             with open(PROC_NET_DEV_PATH, 'r') as net_dev:
                 for line in net_dev.read().splitlines():
                     if line.lstrip().startswith(self._net_intf_name):
@@ -215,7 +215,7 @@ class os_stats:
                 logger.debug(f'_net_intf_bytes_rec_prev: {self._net_intf_bytes_rec_prev}')
                 logger.debug(f'_net_intf_bytes_trans_prev: {self._net_intf_bytes_trans_prev}')
                 
-                #won't do a delta on the first pass, so return 0
+                # won't do a delta on the first pass, so return 0
                 if self._net_intf_bytes_rec_prev is None and self._net_intf_bytes_trans_prev is None:
                     self.net_rec_rate = 0
                     self.net_trans_rate = 0
@@ -223,19 +223,19 @@ class os_stats:
                     self.net_rec_rate = self._net_intf_bytes_rec - self._net_intf_bytes_rec_prev
                     self.net_trans_rate = self._net_intf_bytes_trans - self._net_intf_bytes_trans_prev
 
-                #setup delta for next iteration
+                # setup delta for next iteration
                 self._net_intf_bytes_rec_prev = self._net_intf_bytes_rec
                 self._net_intf_bytes_trans_prev = self._net_intf_bytes_trans
                 
                 logger.debug(f'net_rec_rate: {self.net_rec_rate}')
                 logger.debug(f'net_trans_rate: {self.net_trans_rate}')
             
-            #/proc/diskstats file parsing
+            # /proc/diskstats file parsing
             with open(PROC_IO_DEV_PATH, 'r') as io_dev:
                 for line in io_dev.read().splitlines():
                     if self._io_device_name in line:
                         intf_line = line.split()
-                        #offset fields by 2 compared to documentation descriptions
+                        # offset fields by 2 compared to documentation descriptions
                         self._io_device_sectors_read = int(intf_line[5])
                         self._io_device_sectors_written = int(intf_line[9])
                         break
@@ -246,7 +246,7 @@ class os_stats:
                 logger.debug(f'_io_device_sectors_read_prev: {self._io_device_sectors_read_prev}')
                 logger.debug(f'_io_device_sectors_written_prev: {self._io_device_sectors_written_prev}')
                 
-                #won't do a delta on the first pass, so return 0
+                # won't do a delta on the first pass, so return 0
                 if self._io_device_sectors_read_prev is None and self._io_device_sectors_written_prev is None:
                     self.io_bytes_read = 0
                     self.io_bytes_written = 0
@@ -256,27 +256,27 @@ class os_stats:
                     self.io_bytes_written = (self._io_device_sectors_written - 
                                              self._io_device_sectors_written_prev) * IO_SECTOR_SIZE
                 
-                #setup delta for next iteration
+                # setup delta for next iteration
                 self._io_device_sectors_read_prev = self._io_device_sectors_read
                 self._io_device_sectors_written_prev = self._io_device_sectors_written
                 
                 logger.debug(f'io_bytes_read: {self.io_bytes_read}')
                 logger.debug(f'io_bytes_written: {self.io_bytes_written}')
             
-            #/sys/class/thermal/thermal_zone*/temp parsing
+            # /sys/class/thermal/thermal_zone*/temp parsing
             with open(f'/sys/class/thermal/thermal_zone{self._thermal_zone_identifier}/temp', 'r') as temp:
                 self.cpu_package_temp = int(temp.read())
                 
                 logger.debug(f'cpu_package_temp: {self.cpu_package_temp}')
             
-            #nvidia-smi command output parsing
+            # nvidia-smi command output parsing
             if self._gpu_type == 'nvidia':
                 try:
-                    #use the nvidia-smi utility to parse temperature for nvidia
+                    # use the nvidia-smi utility to parse temperature for nvidia
                     nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
                                                        capture_output=True, text=True, check=True)
                     
-                    #multiply by 1000 to align with sys sensor readings default format
+                    # multiply by 1000 to align with sys sensor readings default format
                     self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
                 except:
                     self.gpu_temp = 0
@@ -284,7 +284,7 @@ class os_stats:
                 
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
             
-            #/sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
+            # /sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
             elif self._gpu_type == 'amd':
                 with open(f'/sys/class/drm/card{self._gpu_card_identifier}/device'
                           f'/hwmon/hwmon{self._hwmon_folder_identifier}/temp1_input', 
@@ -299,6 +299,6 @@ class os_stats:
         
         except Exception as exception:
             logger.error(f'Encountered following exception: {type(exception)} {exception}')
-            #uncomment for debugging purposes only
+            # uncomment for debugging purposes only
             #logger.error(traceback.format_exc())
             raise
