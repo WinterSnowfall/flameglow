@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 1.92
-@date: 26/06/2023
+@version: 2.00
+@date: 12/09/2023
 
 Warning: Built for use with python 3.6+
 '''
@@ -33,10 +33,13 @@ PROC_IO_DEV_PATH = '/proc/diskstats'
 SYS_RASPBERRY_PI_HOST_TYPE = 'raspberrypi'
 SYS_CPU_THERMAL_ZONE_TYPE_PI = 'cpu-thermal'
 SYS_CPU_THERMAL_ZONE_TYPE_GENERIC = 'x86_pkg_temp'
-SYS_GPU_AMD_CARD_TYPE = 'amdgpu'
+# could possibly add intel dGPU support in the future
+SYS_GPU_CARD_TYPES = ('amdgpu')
 
 IO_SECTOR_SIZE = 512
 
+# could possibly add intel dGPU support in the future
+GPU_TYPES = ('nvidia', 'amd')
 NVIDIA_GPU_TEMP_COMMAND = 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader'
 
 class os_stats:
@@ -86,8 +89,8 @@ class os_stats:
         
         self.detect_thermal_zone_path()
         
-        if self._gpu_type == 'amd':
-            self.detect_amd_gpu_path()
+        if self._gpu_type == GPU_TYPES[1]:
+            self.detect_gpu_path()
     
     def set_net_intf_name(self, net_intf_name):
         self._net_intf_name = net_intf_name
@@ -124,26 +127,26 @@ class os_stats:
         logger.critical('Thermal zones have been exhausted without detection.')
         raise SystemExit(2)
     
-    def detect_amd_gpu_path(self):
+    def detect_gpu_path(self):
         logger.info(f'Detecting GPU package thermal zone for {self._gpu_type} GPU type...')
         
         card_no = 0
         hwmon_no = 0
         
         while os.path.exists(f'/sys/class/drm/card{card_no}'):
-            logger.debug(f'Atempting AMD GPU card detection for card: {card_no}...')
+            logger.debug(f'Atempting GPU card detection for card: {card_no}...')
             
             while os.path.exists(f'sys/class/drm/card{card_no}/device/hwmon/hwmon{hwmon_no}'):
-                logger.debug(f'Atempting AMD GPU card detection for hwmon: {hwmon_no}...')
+                logger.debug(f'Atempting GPU card detection for hwmon: {hwmon_no}...')
                 
                 with open(f'/sys/class/drm/card{card_no}/device/hwmon/hwmon{hwmon_no}/name', 'r') as card_name:
                     detected_card_name = card_name.read().strip()
                     logger.debug(f'detected_card_name: {detected_card_name}')
                     
-                    if detected_card_name == SYS_GPU_AMD_CARD_TYPE:
+                    if detected_card_name in SYS_GPU_CARD_TYPES:
                         self._gpu_card_identifier = card_no
                         self._hwmon_folder_identifier = hwmon_no
-                        logger.info('Succesfully detected AMD GPU card.')
+                        logger.info('Succesfully detected GPU card.')
                         return
         
         # early returns in case of detection will guarantee this is only hit when something goes wrong
@@ -270,7 +273,7 @@ class os_stats:
                 logger.debug(f'cpu_package_temp: {self.cpu_package_temp}')
             
             # nvidia-smi command output parsing
-            if self._gpu_type == 'nvidia':
+            if self._gpu_type == GPU_TYPES[0]:
                 try:
                     # use the nvidia-smi utility to parse temperature for nvidia
                     nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
@@ -285,7 +288,7 @@ class os_stats:
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
             
             # /sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
-            elif self._gpu_type == 'amd':
+            elif self._gpu_type == GPU_TYPES[1]:
                 with open(f'/sys/class/drm/card{self._gpu_card_identifier}/device'
                           f'/hwmon/hwmon{self._hwmon_folder_identifier}/temp1_input', 
                           'r') as temp:

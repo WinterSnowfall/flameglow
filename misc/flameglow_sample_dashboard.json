@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.5.2"
+      "version": "10.1.1"
     },
     {
       "type": "datasource",
@@ -89,6 +89,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -224,6 +225,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -261,25 +277,7 @@
         }
       ],
       "title": "CPU Usage (Average Core Load)",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -306,6 +304,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -439,6 +438,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -475,25 +489,7 @@
         }
       ],
       "title": "Total RAM Usage",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -561,7 +557,7 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -576,20 +572,7 @@
         }
       ],
       "title": "GPU Temperature",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "ghost",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "stat"
     },
     {
@@ -636,7 +619,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 15,
+        "h": 17,
         "w": 4,
         "x": 20,
         "y": 5
@@ -657,7 +640,7 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -672,25 +655,7 @@
         }
       ],
       "title": "CPU Package Temperature",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "stat"
     },
     {
@@ -717,6 +682,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -850,11 +816,26 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 0,
         "y": 8
@@ -887,25 +868,7 @@
         }
       ],
       "title": "Incoming Traffic (Average Rate)",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -932,6 +895,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1065,11 +1029,26 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 10,
         "y": 8
@@ -1102,25 +1081,7 @@
         }
       ],
       "title": "Outgoing Traffic (Average Rate)",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -1147,6 +1108,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1280,14 +1242,29 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 0,
-        "y": 14
+        "y": 15
       },
       "id": 14,
       "options": {
@@ -1317,25 +1294,7 @@
         }
       ],
       "title": "I/O Reads (Average Rate)",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -1362,6 +1321,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1495,14 +1455,29 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "boreas"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 10,
-        "y": 14
+        "y": 15
       },
       "id": 15,
       "options": {
@@ -1532,25 +1507,7 @@
         }
       ],
       "title": "I/O Writes (Average Rate)",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "Time",
-                "deimos",
-                "ghost",
-                "hades",
-                "pluto",
-                "charon",
-                "phobos",
-                "erebus"
-              ]
-            }
-          }
-        }
-      ],
+      "transformations": [],
       "type": "timeseries"
     }
   ],
@@ -1569,6 +1526,6 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "C0XW79a7k",
-  "version": 9,
+  "version": 4,
   "weekStart": ""
 }
