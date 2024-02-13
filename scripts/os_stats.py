@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.00
-@date: 12/09/2023
+@version: 2.10
+@date: 12/02/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -39,8 +39,9 @@ SYS_GPU_CARD_TYPES = ('amdgpu')
 IO_SECTOR_SIZE = 512
 
 # could possibly add intel dGPU support in the future
-GPU_TYPES = ('nvidia', 'amd')
-NVIDIA_GPU_TEMP_COMMAND = 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader'
+GPU_TYPES = ('nvidia', 'amd', 'raspberrypi')
+NVIDIA_GPU_TEMP_COMMAND = ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader']
+RPI_GPU_TEMP_COMMAND = ['vcgencmd', 'measure_temp']
 
 class os_stats:
     '''gather host stats using the /proc and /sys OS stat modules'''
@@ -276,8 +277,8 @@ class os_stats:
             if self._gpu_type == GPU_TYPES[0]:
                 try:
                     # use the nvidia-smi utility to parse temperature for nvidia
-                    nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, shell=True, 
-                                                       capture_output=True, text=True, check=True)
+                    nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, capture_output=True, 
+                                                       text=True, check=True)
                     
                     # multiply by 1000 to align with sys sensor readings default format
                     self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
@@ -295,6 +296,23 @@ class os_stats:
                     self.gpu_temp = int(temp.read())
                     
                     logger.debug(f'gpu_temp: {self.gpu_temp}')
+                    
+            # vcgencmd measure_temp command output parsing
+            elif self._gpu_type == GPU_TYPES[2]:
+                try:
+                    # use the vcgencmd utility to parse temperature for Raspberry Pis
+                    vcgencmd_output = subprocess.run(RPI_GPU_TEMP_COMMAND, capture_output=True, 
+                                                     text=True, check=True)
+                    
+                    # multiply by 1000 to align with sys sensor readings default format
+                    self.gpu_temp = int(float(vcgencmd_output.stdout.strip().split('=')[1][:-2]) * 1000)
+                    
+                except:
+                    self.gpu_temp = 0
+                    logger.warning('Unable to retrieve Raspberry Pi GPU temperature from vcgencmd.')
+                
+                logger.debug(f'gpu_temp: {self.gpu_temp}')
+                
             else:
                 logger.debug('No supported GPU type detected. Skipping GPU temp collection.')
             

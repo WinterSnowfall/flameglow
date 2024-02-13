@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.00
-@date: 12/09/2023
+@version: 2.10
+@date: 12/02/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -17,7 +17,7 @@ from os_stats import os_stats
 # conf file block
 CONF_FILE_PATH = os.path.join('..', 'conf', 'flameglow.conf')
 
-SUPPORTED_GPU_TYPES = ('nvidia', 'amd')
+SUPPORTED_GPU_TYPES = ('nvidia', 'amd', 'raspberrypi')
 
 def sigterm_handler(signum, frame):
     print('Stopping stats collection due to SIGTERM...')
