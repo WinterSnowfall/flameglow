@@ -73,7 +73,7 @@ if __name__ == '__main__':
     if GPU_TYPE in SUPPORTED_GPU_TYPES:
         sys_stats_gpu_temp = Gauge('sys_stats_gpu_temp', 'Current GPU temperature')
     if NVME_DEVICE_NAME in IO_DEV_NAME:
-        sys_stats_nvme_composite_temp = Gauge('sys_stats_nvme_composite_temp', 'Current NVME composite temperature')
+        sys_stats_nvme_composite_temp = Gauge('sys_stats_nvme_composite_temp', 'Current NVMe composite temperature')
     #------------------------------------------------------------------------------------------------------------
 
     #############################################################################################################
