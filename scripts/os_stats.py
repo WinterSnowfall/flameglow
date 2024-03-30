@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.20
-@date: 24/02/2024
+@version: 2.30
+@date: 29/03/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -40,7 +40,8 @@ IO_SECTOR_SIZE = 512
 
 # could possibly add intel dGPU support in the future
 GPU_TYPES = ('nvidia', 'amd', 'raspberrypi')
-NVIDIA_GPU_TEMP_COMMAND = ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader']
+NVIDIA_GPU_STATS_COMMAND = ['nvidia-smi', '--query-gpu=utilization.gpu,memory.used,temperature.gpu', 
+                            '--format=csv,noheader']
 RPI_GPU_TEMP_COMMAND = ['vcgencmd', 'measure_temp']
 
 class os_stats:
@@ -74,6 +75,10 @@ class os_stats:
         self.net_trans_rate = 0
         self.io_bytes_read = 0
         self.io_bytes_written = 0
+        
+        # currently only relevant for Nvidia GPUs
+        self.gpu_usage = 0
+        self.gpu_memory_usage = 0
 
         self.cpu_package_temp = 0
         self.nvme_composite_temp = 0
@@ -200,6 +205,9 @@ class os_stats:
         self.net_trans_rate = 0
         self.io_bytes_read = 0
         self.io_bytes_written = 0
+        
+        self.gpu_usage = 0
+        self.gpu_memory_usage = 0
 
         self.cpu_package_temp = 0
         self.nvme_composite_temp = 0
@@ -325,16 +333,24 @@ class os_stats:
             # nvidia-smi command output parsing
             if self._gpu_type == GPU_TYPES[0]:
                 try:
-                    # use the nvidia-smi utility to parse temperature for nvidia
-                    nvidia_smi_output = subprocess.run(NVIDIA_GPU_TEMP_COMMAND, capture_output=True,
-                                                       text=True, check=True)
-
+                    # use the nvidia-smi utility to parse GPU stats for Nvidia
+                    nvidia_smi_output_raw = subprocess.run(NVIDIA_GPU_STATS_COMMAND, capture_output=True,
+                                                           text=True, check=True)
+                    nvidia_smi_output = nvidia_smi_output_raw.stdout.split(', ')
+                    # returned GPU usage will be a integer percentage
+                    self.gpu_usage = int(nvidia_smi_output[0].split()[0])
+                    # returned GPU memory usage will in MiBs
+                    self.gpu_memory_usage = int(nvidia_smi_output[1].split()[0])
                     # multiply by 1000 to align with sys sensor readings default format
-                    self.gpu_temp = int(nvidia_smi_output.stdout.strip()) * 1000
+                    self.gpu_temp = int(nvidia_smi_output[2]) * 1000
                 except:
+                    self.gpu_usage = 0
+                    self.gpu_memory_usage = 0
                     self.gpu_temp = 0
                     logger.warning('Nvidia SMI could not communicate with the Nvidia driver.')
 
+                logger.debug(f'gpu_usage: {self.gpu_usage}')
+                logger.debug(f'gpu_memory_usage: {self.gpu_memory_usage}')
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
 
             # /sys/class/drm/card*/device/hwmon/hwmon*/temp1_input file parsing
@@ -366,7 +382,7 @@ class os_stats:
                 logger.debug(f'gpu_temp: {self.gpu_temp}')
 
             else:
-                logger.debug('No supported GPU type detected. Skipping GPU temp collection.')
+                logger.debug('No supported GPU type detected. Skipping GPU stats collection.')
 
             logger.info('***** Data collection complete *****')
 

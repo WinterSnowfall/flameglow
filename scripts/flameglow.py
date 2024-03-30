@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.20
-@date: 24/02/2024
+@version: 2.30
+@date: 29/03/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -70,6 +70,10 @@ if __name__ == '__main__':
 
     #------------------------------------------------ sys_stats -------------------------------------------------
     sys_stats_cpu_package_temp = Gauge('sys_stats_cpu_package_temp', 'Current CPU package temperature')
+    # core and memory usage statistics are only supported on Nvidia GPUs for now
+    if GPU_TYPE == SUPPORTED_GPU_TYPES[0]:
+        sys_stats_gpu_usage = Gauge('sys_stats_gpu_usage', 'Average GPU core usage')
+        sys_stats_gpu_memory_usage = Gauge('sys_stats_gpu_memory_usage', 'Amount of used GPU memory')
     if GPU_TYPE in SUPPORTED_GPU_TYPES:
         sys_stats_gpu_temp = Gauge('sys_stats_gpu_temp', 'Current GPU temperature')
     if NVME_DEVICE_NAME in IO_DEV_NAME:
@@ -101,6 +105,10 @@ if __name__ == '__main__':
             proc_stats_io_write_rate.set(os_stats_inst.io_bytes_written / STATS_COLLECTION_INTERVAL)
 
             sys_stats_cpu_package_temp.set(os_stats_inst.cpu_package_temp)
+            # core and memory usage statistics are only supported on Nvidia GPUs for now
+            if GPU_TYPE == SUPPORTED_GPU_TYPES[0]:
+                sys_stats_gpu_usage.set(os_stats_inst.gpu_usage)
+                sys_stats_gpu_memory_usage.set(os_stats_inst.gpu_memory_usage)
             if GPU_TYPE in SUPPORTED_GPU_TYPES:
                 sys_stats_gpu_temp.set(os_stats_inst.gpu_temp)
             if NVME_DEVICE_NAME in IO_DEV_NAME:
