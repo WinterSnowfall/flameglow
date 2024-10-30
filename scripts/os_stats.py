@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.30
-@date: 29/03/2024
+@version: 2.32
+@date: 30/10/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -10,6 +10,7 @@ Warning: Built for use with python 3.6+
 import logging
 import os
 import subprocess
+import json
 from logging.handlers import RotatingFileHandler
 # uncomment for debugging purposes only
 #import traceback
@@ -40,6 +41,7 @@ IO_SECTOR_SIZE = 512
 
 # could possibly add intel dGPU support in the future
 GPU_TYPES = ('nvidia', 'amd', 'raspberrypi')
+IO_SERIAL_NAME_COMMAND = ['lsblk', '--nodeps', '-J', '-o', 'name,serial']
 NVIDIA_GPU_STATS_COMMAND = ['nvidia-smi', '--query-gpu=utilization.gpu,memory.used,temperature.gpu', 
                             '--format=csv,noheader']
 RPI_GPU_TEMP_COMMAND = ['vcgencmd', 'measure_temp']
@@ -50,13 +52,13 @@ class os_stats:
     _logging_level = logging.WARNING
 
     def __init__(self, host_type, gpu_type, logging_level):
-        self._net_intf_name = None
+        self._net_intf = None
         self._net_intf_bytes_rec_prev = None
         self._net_intf_bytes_trans_prev = None
         self._net_intf_bytes_rec = 0
         self._net_intf_bytes_trans = 0
 
-        self._io_device_name = None
+        self._io_device = None
         self._io_device_sectors_read_prev = None
         self._io_device_sectors_written_prev = None
         self._io_device_sectors_read = 0
@@ -101,11 +103,33 @@ class os_stats:
         if self._gpu_type == GPU_TYPES[1]:
             self.detect_gpu_path()
 
-    def set_net_intf_name(self, net_intf_name):
-        self._net_intf_name = net_intf_name
+    def set_network_interface(self, net_intf):
+        self._net_intf = net_intf
+        
+    def get_io_device(self):
+        return self._io_device
 
-    def set_io_device_name(self, io_device_name):
-        self._io_device_name = io_device_name
+    def set_io_device(self, io_device):
+        # i/o device serial numbers can be used as a more strict identifier
+        try:
+            lsblk_output_raw = subprocess.run(IO_SERIAL_NAME_COMMAND, capture_output=True,
+                                              text=True, check=True)
+            lsblk_output = json.loads(lsblk_output_raw.stdout)
+            
+            for block_device in lsblk_output['blockdevices']:
+                block_device_name = block_device['name']
+                block_device_serial = block_device['serial']
+                
+                logger.debug(f'Found I/O device {block_device_name} with serial number {block_device_serial}.')
+                
+                if block_device_serial == io_device:
+                    logger.info(f'I/O device name set to {block_device_name}.')
+                    self._io_device = block_device_name
+                    return
+        except:
+            pass
+            
+        self._io_device = io_device
 
     def detect_cpu_thermal_zone_path(self):
         logger.info(f'Detecting CPU package thermal zone for {self._host_type} host type...')
@@ -249,7 +273,7 @@ class os_stats:
             # /proc/net/dev file parsing
             with open(PROC_NET_DEV_PATH, 'r') as net_dev:
                 for line in net_dev.read().splitlines():
-                    if line.lstrip().startswith(self._net_intf_name):
+                    if line.lstrip().startswith(self._net_intf):
                         intf_line = line.split(':')[1].split()
                         self._net_intf_bytes_rec = int(intf_line[0])
                         self._net_intf_bytes_trans = int(intf_line[8])
@@ -279,7 +303,7 @@ class os_stats:
             # /proc/diskstats file parsing
             with open(PROC_IO_DEV_PATH, 'r') as io_dev:
                 for line in io_dev.read().splitlines():
-                    if self._io_device_name in line:
+                    if self._io_device in line:
                         intf_line = line.split()
                         # offset fields by 2 compared to documentation descriptions
                         self._io_device_sectors_read = int(intf_line[5])

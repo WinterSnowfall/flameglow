@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.30
-@date: 29/03/2024
+@version: 2.32
+@date: 30/10/2024
 
 Warning: Built for use with python 3.6+
 '''
@@ -46,8 +46,8 @@ if __name__ == '__main__':
 
         PROMETHEUS_CLIENT_PORT = general_section.getint('prometheus_client_port')
         STATS_COLLECTION_INTERVAL = general_section.getint('collection_interval')
-        NET_INTF_NAME = general_section.get('network_interface_name')
-        IO_DEV_NAME = general_section.get('io_device_name')
+        NETWORK_INTERFACE = general_section.get('network_interface')
+        IO_DEVICE_INPUT = general_section.get('io_device')
         HOST_TYPE = general_section.get('host_type')
         GPU_TYPE = general_section.get('gpu_type')
         LOGGING_LEVEL = general_section.get('logging_level')
@@ -55,6 +55,12 @@ if __name__ == '__main__':
     except:
         print('Could not parse configuration file. Please make sure the appropriate structure is in place!')
         raise SystemExit(1)
+    
+    os_stats_inst = os_stats(HOST_TYPE, GPU_TYPE, LOGGING_LEVEL)
+    os_stats_inst.set_network_interface(NETWORK_INTERFACE)
+    os_stats_inst.set_io_device(IO_DEVICE_INPUT)
+    # ensures both serial number and name based device tags are considered
+    IO_DEVICE = os_stats_inst.get_io_device()
 
     ### Prometheus client metrics ###############################################################################
 
@@ -76,7 +82,7 @@ if __name__ == '__main__':
         sys_stats_gpu_memory_usage = Gauge('sys_stats_gpu_memory_usage', 'Amount of used GPU memory')
     if GPU_TYPE in SUPPORTED_GPU_TYPES:
         sys_stats_gpu_temp = Gauge('sys_stats_gpu_temp', 'Current GPU temperature')
-    if NVME_DEVICE_NAME in IO_DEV_NAME:
+    if NVME_DEVICE_NAME in IO_DEVICE:
         sys_stats_nvme_composite_temp = Gauge('sys_stats_nvme_composite_temp', 'Current NVMe composite temperature')
     #------------------------------------------------------------------------------------------------------------
 
@@ -84,10 +90,6 @@ if __name__ == '__main__':
 
     # start a Prometheus http server thread to expose the metrics
     start_http_server(PROMETHEUS_CLIENT_PORT)
-
-    os_stats_inst = os_stats(HOST_TYPE, GPU_TYPE, LOGGING_LEVEL)
-    os_stats_inst.set_net_intf_name(NET_INTF_NAME)
-    os_stats_inst.set_io_device_name(IO_DEV_NAME)
 
     terminate_signal = False
 
@@ -111,7 +113,7 @@ if __name__ == '__main__':
                 sys_stats_gpu_memory_usage.set(os_stats_inst.gpu_memory_usage)
             if GPU_TYPE in SUPPORTED_GPU_TYPES:
                 sys_stats_gpu_temp.set(os_stats_inst.gpu_temp)
-            if NVME_DEVICE_NAME in IO_DEV_NAME:
+            if NVME_DEVICE_NAME in IO_DEVICE:
                 sys_stats_nvme_composite_temp.set(os_stats_inst.nvme_composite_temp)
 
             sleep(STATS_COLLECTION_INTERVAL)
