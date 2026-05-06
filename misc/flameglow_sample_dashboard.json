@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
   "links": [],
   "panels": [
     {
@@ -110,7 +109,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-green",
+                  "fixedColor": "semi-dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -125,7 +124,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "light-purple",
                   "mode": "fixed"
                 }
               }
@@ -145,41 +144,11 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "phobos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "deimos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 0,
         "y": 0
@@ -198,7 +167,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -296,7 +265,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-green",
+                  "fixedColor": "semi-dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -311,7 +280,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "light-purple",
                   "mode": "fixed"
                 }
               }
@@ -331,41 +300,11 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "phobos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "deimos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
         "x": 10,
         "y": 0
@@ -384,7 +323,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -445,7 +384,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
+        "h": 11,
         "w": 4,
         "x": 20,
         "y": 0
@@ -469,7 +408,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -612,7 +551,7 @@
         "h": 6,
         "w": 10,
         "x": 0,
-        "y": 6
+        "y": 7
       },
       "id": 17,
       "options": {
@@ -628,7 +567,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -770,7 +709,7 @@
         "h": 6,
         "w": 10,
         "x": 10,
-        "y": 6
+        "y": 7
       },
       "id": 18,
       "options": {
@@ -786,7 +725,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -803,378 +742,6 @@
         }
       ],
       "title": "Total VRAM Usage",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "hades"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pluto"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "charon"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "phobos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "deimos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 10,
-        "x": 0,
-        "y": 12
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "proc_stats_rec_rate{}",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Incoming Traffic (Average Rate)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "hades"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pluto"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "charon"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "erebus"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "phobos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "deimos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 10,
-        "x": 10,
-        "y": 12
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "proc_stats_trans_rate{}",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Outgoing Traffic (Average Rate)",
       "type": "timeseries"
     },
     {
@@ -1221,10 +788,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 4,
         "x": 20,
-        "y": 14
+        "y": 11
       },
       "id": 13,
       "options": {
@@ -1245,7 +812,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1343,7 +910,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-green",
+                  "fixedColor": "semi-dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -1358,7 +925,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "light-purple",
                   "mode": "fixed"
                 }
               }
@@ -1378,11 +945,122 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 10,
+        "x": 0,
+        "y": 13
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "proc_stats_rec_rate{}",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Incoming Traffic (Average Rate)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hades"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "phobos"
+              "options": "pluto"
             },
             "properties": [
               {
@@ -1397,13 +1075,271 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "deimos"
+              "options": "charon"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
                   "fixedColor": "light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 10,
+        "x": 10,
+        "y": 13
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "proc_stats_trans_rate{}",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Outgoing Traffic (Average Rate)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 30
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 50
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 60
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 17
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sys_stats_nvme_composite_temp{} / 1000",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "NVMe Composite Temperature",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hades"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pluto"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "charon"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "erebus"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
                   "mode": "fixed"
                 }
               }
@@ -1415,7 +1351,7 @@
         "h": 5,
         "w": 10,
         "x": 0,
-        "y": 17
+        "y": 18
       },
       "id": 14,
       "options": {
@@ -1431,7 +1367,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1531,7 +1467,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-green",
+                  "fixedColor": "semi-dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -1546,7 +1482,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "light-purple",
                   "mode": "fixed"
                 }
               }
@@ -1566,36 +1502,6 @@
                 }
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "phobos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "deimos"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
           }
         ]
       },
@@ -1603,7 +1509,7 @@
         "h": 5,
         "w": 10,
         "x": 10,
-        "y": 17
+        "y": 18
       },
       "id": 15,
       "options": {
@@ -1619,7 +1525,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1635,93 +1541,6 @@
       ],
       "title": "I/O Writes (Average Rate)",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-blue",
-                "value": 0
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 30
-              },
-              {
-                "color": "semi-dark-yellow",
-                "value": 50
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 60
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 70
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 20,
-        "y": 17
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {},
-        "textMode": "value_and_name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sys_stats_nvme_composite_temp{} / 1000",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "NVMe Composite Temperature",
-      "type": "stat"
     }
   ],
   "preload": false,
@@ -1739,5 +1558,5 @@
   "timezone": "",
   "title": "flameglow",
   "uid": "C0XW79a7k",
-  "version": 4
+  "version": 5
 }
