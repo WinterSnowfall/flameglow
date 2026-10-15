@@ -3,8 +3,8 @@
   "kind": "Dashboard",
   "metadata": {
     "name": "C0XW79a7k",
-    "generation": 9,
-    "creationTimestamp": "2026-04-27T17:57:10Z",
+    "generation": 7,
+    "creationTimestamp": "2026-07-29T13:42:42Z",
     "labels": {},
     "annotations": {}
   },
@@ -22,9 +22,6 @@
               "matchAny": false,
               "tags": [],
               "type": "dashboard"
-            },
-            "labels": {
-              "grafana.app/export-label": "grafana-1"
             }
           },
           "enable": true,
@@ -63,7 +60,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -78,7 +76,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -88,6 +86,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -157,7 +157,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -202,22 +202,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -254,7 +239,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -269,7 +255,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -355,7 +341,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -370,7 +357,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -458,7 +445,8 @@
                         "range": true
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -473,7 +461,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -483,6 +471,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -552,7 +542,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -597,22 +587,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -649,7 +624,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -664,7 +640,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -674,6 +650,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -743,7 +721,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -788,22 +766,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -842,7 +805,8 @@
                         "range": true
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -857,7 +821,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -945,7 +909,8 @@
                         "range": true
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -960,7 +925,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -970,6 +935,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -1036,58 +1003,13 @@
                   {
                     "matcher": {
                       "id": "byName",
-                      "options": "hades"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-yellow",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "pluto"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-green",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "charon"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-blue",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
                       "options": "erebus"
                     },
                     "properties": [
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -1126,7 +1048,8 @@
                         "range": true
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -1141,7 +1064,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1151,6 +1074,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -1214,58 +1139,13 @@
                   {
                     "matcher": {
                       "id": "byName",
-                      "options": "hades"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-yellow",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "pluto"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-green",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "charon"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "dark-blue",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
                       "options": "erebus"
                     },
                     "properties": [
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -1302,7 +1182,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -1317,7 +1198,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1327,6 +1208,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -1398,7 +1281,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -1443,22 +1326,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -1495,7 +1363,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -1510,7 +1379,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1520,6 +1389,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -1589,7 +1460,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -1634,22 +1505,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -1686,7 +1542,8 @@
                         "legendFormat": "{{name}}"
                       },
                       "labels": {
-                        "grafana.app/export-label": "prometheus-1"
+                        "grafana.app/export-label": "prometheus-1",
+                        "grafana.app/export-datasource-name": "Prometheus"
                       }
                     },
                     "refId": "A",
@@ -1701,7 +1558,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1",
+            "version": "13.1.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1711,6 +1568,8 @@
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
                 },
@@ -1780,7 +1639,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-yellow",
+                          "fixedColor": "semi-dark-orange",
                           "mode": "fixed"
                         }
                       }
@@ -1825,22 +1684,7 @@
                       {
                         "id": "color",
                         "value": {
-                          "fixedColor": "semi-dark-orange",
-                          "mode": "fixed"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "ghost"
-                    },
-                    "properties": [
-                      {
-                        "id": "color",
-                        "value": {
-                          "fixedColor": "text",
+                          "fixedColor": "semi-dark-yellow",
                           "mode": "fixed"
                         }
                       }
@@ -1889,7 +1733,7 @@
               "x": 20,
               "y": 0,
               "width": 4,
-              "height": 11,
+              "height": 12,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-12"
@@ -1925,19 +1769,6 @@
           {
             "kind": "GridLayoutItem",
             "spec": {
-              "x": 20,
-              "y": 11,
-              "width": 4,
-              "height": 5,
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-13"
-              }
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
               "x": 0,
               "y": 12,
               "width": 10,
@@ -1958,6 +1789,19 @@
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-10"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 20,
+              "y": 12,
+              "width": 4,
+              "height": 4,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-13"
               }
             }
           },
