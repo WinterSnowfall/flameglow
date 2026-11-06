@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 @author: Winter Snowfall
-@version: 2.32
-@date: 30/10/2024
+@version: 2.33
+@date: 06/11/2026
 
 Warning: Built for use with python 3.6+
 '''
@@ -366,8 +366,10 @@ class os_stats:
                     # returned GPU memory usage will in MiBs
                     self.gpu_memory_usage = int(nvidia_smi_output[1].split()[0])
                     # multiply by 1000 to align with sys sensor readings default format
-                    self.gpu_temp = int(nvidia_smi_output[2]) * 1000
+                    self.gpu_temp = int(float(nvidia_smi_output[2]) * 1000)
                 except:
+                    # uncomment for debugging purposes only
+                    #logger.error(traceback.format_exc())
                     self.gpu_usage = 0
                     self.gpu_memory_usage = 0
                     self.gpu_temp = 0

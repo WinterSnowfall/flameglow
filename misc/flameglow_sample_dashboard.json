@@ -3,8 +3,8 @@
   "kind": "Dashboard",
   "metadata": {
     "name": "C0XW79a7k",
-    "generation": 7,
-    "creationTimestamp": "2026-07-29T13:42:42Z",
+    "generation": 3,
+    "creationTimestamp": "2026-10-14T15:15:29Z",
     "labels": {},
     "annotations": {}
   },
@@ -76,7 +76,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -255,7 +255,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -357,7 +357,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -461,7 +461,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -640,7 +640,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -821,7 +821,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -925,7 +925,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -1064,7 +1064,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -1198,7 +1198,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -1379,7 +1379,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -1558,7 +1558,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.1",
+            "version": "13.2.4",
             "spec": {
               "options": {
                 "annotations": {
@@ -1855,7 +1855,7 @@
       "timezone": "browser",
       "from": "now-12h",
       "to": "now",
-      "autoRefresh": "10s",
+      "autoRefresh": "30s",
       "autoRefreshIntervals": [
         "5s",
         "10s",
